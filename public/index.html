@@ -145,10 +145,12 @@
         }
 
         window.onmessage = function (e) {
-          console.log("IT IS ARRIVING", e);
-          if (e.data == "hello") {
-            alert("It works!");
-          }
+          console.log(e.data, "DATA");
+          iframeWind.NOP_VIEWER.fireEvent({
+            type: iframeWind.Autodesk.ADN.ElementLocator.Event
+              .LOCATE_ELEMENT_EVENT,
+            search: e.data.values,
+          });
         };
 
         // lockItem.addEventListener(
