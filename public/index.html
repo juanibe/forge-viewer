@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=no" />
+        <meta name="author" content="Eason Kang" />
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="https://github.com/Autodesk-Forge/learn.forge.viewmodels/raw/master/img/favicon.ico">
+
+        <title>Autodesk Forge Viewer Element Locator Demo - Iframe</title>
+        <style>
+            body {
+              margin: 0;
+              padding: 0;
+            }
+      
+            table {
+              position: absolute;
+            }
+
+            iframe {
+                margin-top: 28px;
+                width: 100%;
+                height: calc(100% - 28px);
+            }
+          </style>
+    </head>
+    <body>
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td>
+                        <a class="ifc-element-item" href="#" data-guid=0 data-idType="IfcGUID">Tomás Moyano's Flat</a>
+                    </td>
+                    <td>
+                        <a class="ifc-element-item"  href="#" data-guid=1 data-idType="IfcGUID">Fatih Girisken's Flat</a>
+                    </td>
+                    <td>
+                        <a class="ifc-element-item"  href="#" data-guid=2 data-idType="IfcGUID">John Does Flat</a>
+                    </td>
+                    <td></td>
+                    <!-- <td><a id="lockItem"  href="#">Lock it!</a></td>
+                    <td><a id="unlockItem"  href="#">Unlock it!</a></td> -->
+                </tr>
+            </tbody>
+        </table>
+        <!-- <iframe id="forge-viewer-iframe" src="viewer/?urn=dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6ZXh0cmFjdC1hdXRvZGVzay1pby0yMDE3bGt3ZWo3eHBiZ3A2M3g0aGwzMzV5Nm0yNm9ha2dnb2YvcmFjX2Jhc2ljX3NhbXBsZV9wcm9qZWN0LmlmYw"></iframe> -->
+        <!-- Braunshweig <iframe id="forge-viewer-iframe" src="viewer/?urn=dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dWE4dWdpaGVvenZxZW5naGpycXk4YWZuZWlrZ3FqM2dfdHV0b3JpYWxfYnVja2V0LzE2NjY2MTE3NDcxMDQuemlw"></iframe> -->
+        <!-- Erfurt --><iframe id="forge-viewer-iframe" src="viewer/?urn=dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dWE4dWdpaGVvenZxZW5naGpycXk4YWZuZWlrZ3FqM2dfdHV0b3JpYWxfYnVja2V0LzE2NjYzNDMzMzQ1NDguemlw"></iframe>
+        <script>
+            document.addEventListener(
+                'DOMContentLoaded',
+                () => {
+                    const viewerIframe = document.getElementById('forge-viewer-iframe');
+                    const ifcElemItems = document.querySelectorAll('a.ifc-element-item');
+                    const lockItem = document.getElementById('lockItem')
+                    const unlockItem = document.getElementById('unlockItem')
+
+                    const flat1 = ["6981485","6711207","6711294","6975760","13061656","12371303","6909938","6938138","7903094","11325489",
+                                        "6909882", "7903039","6710938","6981582","6711207","6975760","13061656","11321083"]
+                    const flat2 = ["6828807","6827700","6709490","6830077","6830110","6830133","6830138","6830046","6829014","6829786",
+                    "6829791", "6829845","6829958","6829992","6829997"]
+                    const flat3 = ["6895546"]
+                    const flats = [flat1,flat2,flat3]
+
+                    for(let i=0; i<ifcElemItems.length; i++) {
+                        const item = ifcElemItems[i];
+                        item.addEventListener(
+                            'click',
+                            (event) => {
+                                event.preventDefault();
+
+                                const guid = event.target.getAttribute('data-guid');
+                                const idType = event.target.getAttribute('data-idType');
+
+                                if (!idType || !guid) return;
+
+                                const iframeWind = viewerIframe.contentWindow;
+                                // iframeWind.NOP_VIEWER.fireEvent({
+                                //     type: iframeWind.Autodesk.ADN.ElementLocator.Event.LOCATE_ELEMENT_EVENT,
+                                //     idType,
+                                //     guid
+                                // });
+                                iframeWind.NOP_VIEWER.fireEvent({
+                                    type: iframeWind.Autodesk.ADN.ElementLocator.Event.LOCATE_ELEMENT_EVENT,
+                                    search: flats[guid]
+                                });
+                            });
+                    }
+
+                    // lockItem.addEventListener(
+                    //     'click',
+                    //     (event) => {
+                    //         event.preventDefault();
+                    //         console.log("loCK ITEM!")
+                    //         const iframeWind = viewerIframe.contentWindow;
+                    //         iframeWind.NOP_VIEWER.fireEvent({
+                    //                 type: iframeWind.Autodesk.ADN.ElementLocator.Event.LOCK_CAMERA_EVENT
+                    //             });
+                    //     });
+                });
+        </script>
+    </body>
+</html>

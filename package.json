@@ -1,0 +1,25 @@
+{
+  "name": "forge-viewer-iframe-interoperability",
+  "version": "1.0.0",
+  "description": "This sample is demonstrating how to locate objects from external link and iframe's parent page",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "autodesk",
+    "forge",
+    "viewer",
+    "locate"
+  ],
+  "author": "Eason Kang <eason.kang@autodesk.com>",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^3.2.0",
+    "express": "^4.17.1",
+    "forge-apis": "^0.9.4",
+    "guid": "^0.0.12",
+    "multer": "^1.4.2"
+  }
+}
