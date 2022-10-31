@@ -136,13 +136,21 @@
             //     idType,
             //     guid
             // });
-            iframeWind.NOP_VIEWER.fireEvent({
-              type: iframeWind.Autodesk.ADN.ElementLocator.Event
-                .LOCATE_ELEMENT_EVENT,
-              search: flats[guid],
-            });
+
+            /****
+             *
+             *
+             * This was working
+             */
+            // iframeWind.NOP_VIEWER.fireEvent({
+            //   type: iframeWind.Autodesk.ADN.ElementLocator.Event
+            //     .LOCATE_ELEMENT_EVENT,
+            //   search: flats[guid],
+            // });
           });
         }
+
+        const iframeWind = viewerIframe.contentWindow;
 
         window.onmessage = function (e) {
           console.log(e.data, "DATA");
