@@ -61,7 +61,7 @@ document.addEventListener(
         Autodesk.Viewing.Initializer(options, () => {
             const htmlDiv = document.getElementById('forgeViewer');
             const config3d = {
-                extensions: ['Autodesk.ADN.ElementLocator', 'LockCameraExtension']
+                extensions: ['Autodesk.ADN.ElementLocator']
             };
 
             viewer = new Autodesk.Viewing.GuiViewer3D(htmlDiv, config3d);

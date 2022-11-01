@@ -23,14 +23,15 @@
       }
 
       iframe {
-        margin-top: 28px;
+        /*margin-top: 28px;*/
         width: 100%;
-        height: calc(100% - 28px);
+        /* height: calc(100% - 28px); */
+        height: 100%;
       }
     </style>
   </head>
   <body>
-    <table border="1">
+    <!-- <table border="1">
       <tbody>
         <tr>
           <td>
@@ -60,12 +61,9 @@
               >John Does Flat</a
             >
           </td>
-          <td></td>
-          <!-- <td><a id="lockItem"  href="#">Lock it!</a></td>
-                    <td><a id="unlockItem"  href="#">Unlock it!</a></td> -->
         </tr>
       </tbody>
-    </table>
+    </table> -->
     <!-- <iframe id="forge-viewer-iframe" src="viewer/?urn=dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6ZXh0cmFjdC1hdXRvZGVzay1pby0yMDE3bGt3ZWo3eHBiZ3A2M3g0aGwzMzV5Nm0yNm9ha2dnb2YvcmFjX2Jhc2ljX3NhbXBsZV9wcm9qZWN0LmlmYw"></iframe> -->
     <!-- Braunshweig <iframe id="forge-viewer-iframe" src="viewer/?urn=dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dWE4dWdpaGVvenZxZW5naGpycXk4YWZuZWlrZ3FqM2dfdHV0b3JpYWxfYnVja2V0LzE2NjY2MTE3NDcxMDQuemlw"></iframe> -->
     <!-- Erfurt --><iframe id="forge-viewer-iframe"></iframe>
@@ -117,7 +115,11 @@
           "6829992",
           "6829997",
         ];
-        const flat3 = ["6895546"];
+        // const flat2 = [
+        // "6701071","6934486","6934487","7442145","7462994","7463290","7506956","7544328","13428658","13428843","7520662"
+        // ];
+        const flat3 = ["6722696","6722784","6722829","6754944","6755986","7705190","7748969","7749023","8225589","8225590","8553345","11377627","11895128","12752776","12859713","13071791","13325941","7744965","7745361","7745371","7745379","12363915","12363928"];
+        // const flat3 = ["13757726"];
         const flats = [flat1, flat2, flat3];
 
         for (let i = 0; i < ifcElemItems.length; i++) {
@@ -142,24 +144,28 @@
              *
              * This was working
              */
-            // iframeWind.NOP_VIEWER.fireEvent({
-            //   type: iframeWind.Autodesk.ADN.ElementLocator.Event
-            //     .LOCATE_ELEMENT_EVENT,
-            //   search: flats[guid],
-            // });
+            iframeWind.NOP_VIEWER.fireEvent({
+              type: iframeWind.Autodesk.ADN.ElementLocator.Event
+                .LOCATE_ELEMENT_EVENT,
+              search: flats[guid],
+            });
           });
         }
 
         const iframeWind = viewerIframe.contentWindow;
-        console.log("Hola")
 
         window.onmessage = function (e) {
-          console.log(e.data, "DATA");
-          iframeWind.NOP_VIEWER.fireEvent({
+          //console.log(e.data, "DATA");
+          // if (e.data == "selection_finished_loading") {
+          //   console.log("Selection finished loading")
+          //   window.parent.postMessage("selection_finished_loading_iframe", '*');
+          // } else {
+            iframeWind.NOP_VIEWER.fireEvent({
             type: iframeWind.Autodesk.ADN.ElementLocator.Event
               .LOCATE_ELEMENT_EVENT,
             search: e.data.values,
           });
+          // }
         };
 
         // lockItem.addEventListener(
