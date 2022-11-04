@@ -173,8 +173,8 @@
         const iframeWind = viewerIframe.contentWindow;
         window.onmessage = function (e) {
           
-          console.log("Message received from parent: ", e.data)
-          if (e.data == "reset-viewer") {
+          console.log("Message received from parent: ", e.data.values)
+          if (e.data.values == "reset-viewer") {
             iframeWind.NOP_VIEWER.fireEvent({
               type: iframeWind.Autodesk.ADN.ElementLocator.Event
                 .RESET_VIEWER_EVENT
