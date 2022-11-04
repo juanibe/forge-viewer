@@ -173,7 +173,7 @@
         const iframeWind = viewerIframe.contentWindow;
         window.onmessage = function (e) {
           
-          alert("Message recieved: ", e)
+          alert("Message recieved: ", e.data)
           console.log("Message received from parent: ", e.data)
           if (e.data == "reset-viewer") {
             iframeWind.NOP_VIEWER.fireEvent({
