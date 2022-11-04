@@ -18,12 +18,14 @@
 
 (function () {
     const ADN_LOCATE_ELEMENT_EVENT = 'adnLocateElementEvent';
+    const ADN_RESET_VIEWER_EVENT = 'adnResetViewerEvent';
 
     class AdnElementLocatorExtension extends Autodesk.Viewing.Extension {
         constructor(viewer, options) {
             super(viewer, options);
 
             this.onLocatingElement = this.onLocatingElement.bind(this);
+            this.onResetViewer = this.onResetViewer.bind(this);
         }
 
         async onLocatingElement(event) {
@@ -35,6 +37,16 @@
             await this.findElement(event);
             console.log('WORKED ON LOCATIN ELEMENT')
             window.parent.postMessage("selection_finished_loading", '*');
+        }
+
+
+        async onResetViewer(event) {
+            if (!this.viewer.isLoadDone())
+                await this.viewer.waitForLoadDone();
+            console.log("Reset viewer event received")
+            this.viewer.clearSelection()
+            this.viewer.showAll()
+            this.viewer.fitToView();
         }
 
         findElementByGlobalIdAsync(search) {
@@ -116,6 +128,11 @@
                 this.onLocatingElement
             );
 
+            this.viewer.addEventListener(
+                ADN_RESET_VIEWER_EVENT,
+                this.onResetViewer
+            );
+
             return true;
         }
 
@@ -125,13 +142,18 @@
                 this.onLocatingElement
             );
 
+            this.viewer.removeEventListener(
+                ADN_RESET_VIEWER_EVENT,
+                this.onResetViewer
+            );
+
             return true;
         }
     }
 
     AutodeskNamespace('Autodesk.ADN.ElementLocator.Event');
     Autodesk.ADN.ElementLocator.Event.LOCATE_ELEMENT_EVENT = ADN_LOCATE_ELEMENT_EVENT;
-
+    Autodesk.ADN.ElementLocator.Event.RESET_VIEWER_EVENT = ADN_RESET_VIEWER_EVENT;
     Autodesk.Viewing.theExtensionManager.registerExtension('Autodesk.ADN.ElementLocator', AdnElementLocatorExtension);
 })();
 

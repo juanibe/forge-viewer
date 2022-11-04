@@ -61,6 +61,7 @@
               >John Does Flat</a
             >
           </td>
+          <td><a id="reset-button" href="#">RESET</a></td>
         </tr>
       </tbody>
     </table> -->
@@ -72,7 +73,7 @@
         var urn = document.location.href.split("=")[1];
         document.getElementById("forge-viewer-iframe").src =
           `viewer/?urn=` + urn;
-        console.log(document.getElementById("forge-viewer-iframe"));
+        //console.log(document.getElementById("forge-viewer-iframe"));
         const viewerIframe = document.getElementById("forge-viewer-iframe");
         const ifcElemItems = document.querySelectorAll("a.ifc-element-item");
         const lockItem = document.getElementById("lockItem");
@@ -153,20 +154,38 @@
           });
         }
 
+        /*
+        *
+        *
+        * Reset button for testing
+        * 
+        */
+        const resetButton = document.getElementById("reset-button");
+        resetButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          const iframeWind = viewerIframe.contentWindow;
+            iframeWind.NOP_VIEWER.fireEvent({
+              type: iframeWind.Autodesk.ADN.ElementLocator.Event
+                .RESET_VIEWER_EVENT
+            });
+        })
+
         const iframeWind = viewerIframe.contentWindow;
 
         window.onmessage = function (e) {
-          //console.log(e.data, "DATA");
-          // if (e.data == "selection_finished_loading") {
-          //   console.log("Selection finished loading")
-          //   window.parent.postMessage("selection_finished_loading_iframe", '*');
-          // } else {
+            
+          if (e.data == "reset-viewer") {
+            iframeWind.NOP_VIEWER.fireEvent({
+              type: iframeWind.Autodesk.ADN.ElementLocator.Event
+                .RESET_VIEWER_EVENT
+            });
+          } else {
             iframeWind.NOP_VIEWER.fireEvent({
             type: iframeWind.Autodesk.ADN.ElementLocator.Event
               .LOCATE_ELEMENT_EVENT,
             search: e.data.values,
           });
-          // }
+          }
         };
 
         // lockItem.addEventListener(
