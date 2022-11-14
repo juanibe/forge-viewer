@@ -8,3 +8,7 @@ body {
     margin: 0;
     background-color: #F0F8FF;
 }
+
+.forge-spinner{
+    display: none !important;
+}
