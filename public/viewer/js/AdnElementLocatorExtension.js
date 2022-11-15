@@ -54,7 +54,7 @@
         }
 
         async onOutlineOnEvent(){
-            this.viewer.isolate([123123213123123123121231231231233123]);
+            this.viewer.isolate([123123213123123123121231231231233123]); //send invalid id to make model isolate
             this.viewer.clearSelection()
         }
 
