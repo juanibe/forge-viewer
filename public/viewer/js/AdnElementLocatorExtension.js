@@ -19,6 +19,8 @@
 (function () {
     const ADN_LOCATE_ELEMENT_EVENT = 'adnLocateElementEvent';
     const ADN_RESET_VIEWER_EVENT = 'adnResetViewerEvent';
+    const ADN_OUTLINE_ON_EVENT = 'adnOutlineOnEvent'
+    const ADN_OUTLINE_OFF_EVENT = 'adnOutlineOffEvent'
 
     class AdnElementLocatorExtension extends Autodesk.Viewing.Extension {
         constructor(viewer, options) {
@@ -26,6 +28,8 @@
 
             this.onLocatingElement = this.onLocatingElement.bind(this);
             this.onResetViewer = this.onResetViewer.bind(this);
+            this.onOutlineOnEvent = this.onOutlineOnEvent.bind(this);
+            this.onOutlineOffEvent = this.onOutlineOffEvent.bind(this);
         }
 
         async onLocatingElement(event) {
@@ -47,6 +51,17 @@
             this.viewer.clearSelection()
             this.viewer.showAll()
             this.viewer.fitToView();
+        }
+
+        async onOutlineOnEvent(){
+            this.viewer.isolate([123123213123123123121231231231233123]);
+            this.viewer.clearSelection()
+        }
+
+        async onOutlineOffEvent(){
+            this.viewer.showAll()
+            this.viewer.clearSelection()
+          
         }
 
         findElementByGlobalIdAsync(search) {
@@ -132,6 +147,14 @@
                 ADN_RESET_VIEWER_EVENT,
                 this.onResetViewer
             );
+            this.viewer.addEventListener(
+                ADN_OUTLINE_ON_EVENT,
+                this.onOutlineOnEvent
+            )
+            this.viewer.addEventListener(
+                ADN_OUTLINE_OFF_EVENT,
+                this.onOutlineOffEvent
+            )
 
             return true;
         }
@@ -147,6 +170,15 @@
                 this.onResetViewer
             );
 
+            this.viewer.removeEventListener(
+                ADN_OUTLINE_ON_EVENT,
+                this.onOutlineOnEvent
+            )
+            this.viewer.removeEventListener(
+                ADN_OUTLINE_OFF_EVENT,
+                this.onOutlineOffEvent
+            )
+
             return true;
         }
     }
@@ -154,6 +186,8 @@
     AutodeskNamespace('Autodesk.ADN.ElementLocator.Event');
     Autodesk.ADN.ElementLocator.Event.LOCATE_ELEMENT_EVENT = ADN_LOCATE_ELEMENT_EVENT;
     Autodesk.ADN.ElementLocator.Event.RESET_VIEWER_EVENT = ADN_RESET_VIEWER_EVENT;
+    Autodesk.ADN.ElementLocator.Event.OUTLINE_ON_EVENT = ADN_OUTLINE_ON_EVENT;
+    Autodesk.ADN.ElementLocator.Event.OUTLINE_OFF_EVENT = ADN_OUTLINE_OFF_EVENT;
     Autodesk.Viewing.theExtensionManager.registerExtension('Autodesk.ADN.ElementLocator', AdnElementLocatorExtension);
 })();
 

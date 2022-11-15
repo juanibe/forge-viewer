@@ -181,13 +181,32 @@
 
         const iframeWind = viewerIframe.contentWindow;
         window.onmessage = function (e) {
+          console.log("***",e.data.values)
           console.log("Message received from parent: ", e.data.values);
+
           if (e.data.values == "reset-viewer") {
             iframeWind.NOP_VIEWER.fireEvent({
               type: iframeWind.Autodesk.ADN.ElementLocator.Event
                 .RESET_VIEWER_EVENT,
             });
-          } else {
+          console.log("Message received from parent: ", e.data.values);   
+          }
+          else if (e.data.values == "on-outline") {
+          console.log('********ONONON')
+            iframeWind.NOP_VIEWER.fireEvent({
+              type: iframeWind.Autodesk.ADN.ElementLocator.Event
+                .OUTLINE_ON_EVENT,
+            });
+          }
+      
+          else if (e.data.values == "off-outline") {
+            console.log('********OFOFOFOFOFOF')
+            iframeWind.NOP_VIEWER.fireEvent({
+              type: iframeWind.Autodesk.ADN.ElementLocator.Event
+                .OUTLINE_OFF_EVENT,
+            });
+          }
+          else {
             iframeWind.NOP_VIEWER.fireEvent({
               type: iframeWind.Autodesk.ADN.ElementLocator.Event
                 .LOCATE_ELEMENT_EVENT,
@@ -196,6 +215,8 @@
           }
         };
 
+     
+       
         // lockItem.addEventListener(
         //     'click',
         //     (event) => {
@@ -207,6 +228,7 @@
         //             });
         //     });
       });
+
     </script>
   </body>
 </html>
