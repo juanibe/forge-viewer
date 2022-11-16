@@ -161,6 +161,7 @@
               search: flats[guid],
             });
           });
+          
         }
 
         /*
@@ -178,11 +179,11 @@
               .RESET_VIEWER_EVENT,
           });
         });
-
+        
         const iframeWind = viewerIframe.contentWindow;
         window.onmessage = function (e) {
-          console.log("***",e.data.values)
           console.log("Message received from parent: ", e.data.values);
+          
 
           if (e.data.values == "reset-viewer") {
             iframeWind.NOP_VIEWER.fireEvent({
@@ -212,8 +213,8 @@
             });
           }
         };
-
-     
+       
+       
        
         // lockItem.addEventListener(
         //     'click',

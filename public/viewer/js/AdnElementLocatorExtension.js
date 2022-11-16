@@ -33,6 +33,7 @@
         }
 
         async onLocatingElement(event) {
+           
             if (!this.viewer.isLoadDone())
                 await this.viewer.waitForLoadDone();
 
@@ -155,7 +156,11 @@
                 ADN_OUTLINE_OFF_EVENT,
                 this.onOutlineOffEvent
             )
-
+            this.viewer.addEventListener(
+                Autodesk.Viewing.AGGREGATE_SELECTION_CHANGED_EVENT,
+                (event) => {
+                    console.log("Selected object", event)
+                });
             return true;
         }
 
@@ -178,7 +183,11 @@
                 ADN_OUTLINE_OFF_EVENT,
                 this.onOutlineOffEvent
             )
-
+            this.viewer.addEventListener(
+                Autodesk.Viewing.AGGREGATE_SELECTION_CHANGED_EVENT,
+                (event) => {
+                     console.log("Selected object", event)
+                });
             return true;
         }
     }

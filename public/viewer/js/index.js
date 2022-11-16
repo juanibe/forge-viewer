@@ -61,7 +61,7 @@ document.addEventListener(
         Autodesk.Viewing.Initializer(options, () => {
             const htmlDiv = document.getElementById('forgeViewer');
             const config3d = {
-                extensions: ['Autodesk.ADN.ElementLocator','Autodesk.Viewing.MarkupsCore','Autodesk.Viewing.MarkupsGui']
+                extensions: ['Autodesk.ADN.ElementLocator','Autodesk.Viewing.MarkupsCore','Autodesk.Viewing.MarkupsGui','Autodesk.DocumentBrowser']
             };
 
             viewer = new Autodesk.Viewing.GuiViewer3D(htmlDiv, config3d);
