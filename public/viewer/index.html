@@ -9,9 +9,28 @@
       <link rel="stylesheet" href="css/index.css" type="text/css">
   </head>
   <body>
+      <button class="button" style="z-index:9999999;">Create ticket</button>
       <div id="forgeViewer"></div>
+
+      <script>
+        const screenshotTarget = document.querySelector("#forgeViewer");
+
+        document.querySelector(".button").addEventListener("click",()=>{
+
+            html2canvas(screenshotTarget).then((canvas) => {
+                const base64image = canvas.toDataURL("image/png");
+                // console.log("SCREENSHOT ACTION FIRST !")
+                // console.log(canvas)
+                // window.location.href = base64image;
+                // console.log(base64image)
+                // window.top.postMessage({values:"TEST MESSAGE FROM INSIDE!!!!!!!!*******"}, '*');
+                window.parent.postMessage({values:base64image}, "*");
+        })
+});
+      </script>
       <script src="js/AdnElementLocatorExtension.js"></script>
       <script src="js/index.js"></script>
       <script src="js/lockCameraExtension.js"></script>
+      <script src="js/html2canvas.js"></script>
   </body>
   </html>

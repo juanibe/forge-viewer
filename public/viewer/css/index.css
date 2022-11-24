@@ -12,3 +12,32 @@ body {
 .forge-spinner{
     display: none !important;
 }
+
+.button{
+    position: absolute;
+	display: flex;
+
+	align-items: center;
+	justify-content: center;
+	padding: 11px 9px;
+	gap: 12px;
+    right: 15px;
+
+	margin-top: 5px;
+
+	background: rgba(13, 16, 18, 0.86);
+	border-radius: 5px;
+
+    z-index: 9999;
+    color:#fff;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    outline: none;
+    border:none;
+    cursor:pointer;
+
+    
+}
+
+.button:hover{
+    background-color: rgb(61, 60, 60);
+}

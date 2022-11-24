@@ -40,7 +40,7 @@
             // if (!event.idType || !event.guid) return;
 
             await this.findElement(event);
-            console.log('WORKED ON LOCATIN ELEMENT')
+            // console.log('WORKED ON LOCATIN ELEMENT')
             window.parent.postMessage("selection_finished_loading", '*');
         }
 
