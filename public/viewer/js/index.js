@@ -100,6 +100,61 @@ document.addEventListener(
             function onDocumentLoadFailure() {
                 console.error('Failed fetching Forge manifest');
             }
+
+
+            function takeScreenshot(screenshot,_callback){
+                viewer.loadExtension('Autodesk.Viewing.MarkupsCore').then(function (markupCore) {
+        
+                    // load the markups
+                    // markupCore.show();
+                    // markupCore.loadMarkups(markupSVG, "layerName");
+
+                    // ideally should also restore state of Viewer for this markup
+
+                    // prepare to render the markups
+                    var canvas = document.getElementById('snapshot');
+                    canvas.width = viewer.container.clientWidth;
+                    canvas.height = viewer.container.clientHeight;
+                    var ctx = canvas.getContext('2d');
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(screenshot, 0, 0, canvas.width, canvas.height);
+                    markupCore.renderToCanvas(ctx);
+                    
+                    // hide the markups
+                    // markupCore.hide();
+                    
+                    setTimeout(()=>{
+                        _callback();    
+                    },500)
+                });
+            }
+
+
+            document.querySelector(".button").addEventListener("click",()=>{
+                console.log("CLICK AT INDEXJS")
+                    var screenshot = new Image();
+                    screenshot.onload = function () {
+                        
+                        takeScreenshot(screenshot,function() {
+                        const newCanvas = document.querySelector("#snapshot")
+                        console.log(newCanvas)
+                        const dataURL = newCanvas.toDataURL();
+                        console.log(dataURL)
+                        window.parent.postMessage({values:dataURL}, "*");
+                        });    
+                       
+                    };
+        
+                    // Get the full image
+                    viewer.getScreenShot(viewer.container.clientWidth, viewer.container.clientHeight, function (blobURL) {
+                        screenshot.src = blobURL;
+                        
+                        
+                    });
+                
+            })
+
+          
         });
     });
 

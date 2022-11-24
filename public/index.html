@@ -70,7 +70,7 @@
     <!-- Braunshweig <iframe id="forge-viewer-iframe" src="viewer/?urn=dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6dWE4dWdpaGVvenZxZW5naGpycXk4YWZuZWlrZ3FqM2dfdHV0b3JpYWxfYnVja2V0LzE2NjY2MTE3NDcxMDQuemlw"></iframe> -->
     <!-- Erfurt --><iframe id="forge-viewer-iframe"></iframe>
     <div style="width:49vw; height:100vh;display:inline-block; display: none;">
-      <canvas id="snapshot" style="position:absolute; display: none;"></canvas>
+      <canvas id="snapshot" width="600" height="700"></canvas>
     </div>
     <button id="ssbutton"  style="position:absolute;display: none;">Snapshot!</button>
     <script>
@@ -200,6 +200,7 @@
 
         const iframeWind = viewerIframe.contentWindow;
         window.onmessage = function (e) {
+          console.log(e)
           // console.log("Message received from parent: ", e.data.values);
           // console.log("Message received*****: ", e.data.values);
           // console.log("ON MESSAGE",e.data.values)

@@ -5,32 +5,82 @@
       <link rel="shortcut icon" href="https://github.com/Autodesk-Forge/learn.forge.viewmodels/raw/master/img/favicon.ico">
       <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/style.min.css" type="text/css">
       <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.js"></script>
-
       <link rel="stylesheet" href="css/index.css" type="text/css">
   </head>
   <body>
       <button class="button" style="z-index:9999999;">Create ticket</button>
       <div id="forgeViewer"></div>
+<canvas id="snapshot" style="display:none;"></canvas>
 
-      <script>
-        const screenshotTarget = document.querySelector("#forgeViewer");
+<script>
 
-        document.querySelector(".button").addEventListener("click",()=>{
+        // document.querySelector(".button").addEventListener("click",()=>{
+        //     console.log("CLICK EVENT !!!***")
 
-            html2canvas(screenshotTarget).then((canvas) => {
-                const base64image = canvas.toDataURL("image/png");
-                // console.log("SCREENSHOT ACTION FIRST !")
-                // console.log(canvas)
-                // window.location.href = base64image;
-                // console.log(base64image)
-                // window.top.postMessage({values:"TEST MESSAGE FROM INSIDE!!!!!!!!*******"}, '*');
-                window.parent.postMessage({values:base64image}, "*");
-        })
-});
+        //     var screenshot = new Image();
+        //     screenshot.onload = function () {
+        //         console.log("ON LOAD FUNCTION")
+        //         viewer.loadExtension('Autodesk.Viewing.MarkupsCore').then(function (markupCore) {
+        //             // load the markups
+        //             markupCore.show();
+        //             markupCore.loadMarkups(markupSVG, "layerName");
+        //             // ideally should also restore state of Viewer for this markup
+        //             // prepare to render the markups
+        //             var canvas = document.getElementById('snapshot');
+        //             canvas.width = viewer.container.clientWidth;
+        //             canvas.height = viewer.container.clientHeight;
+        //             var ctx = canvas.getContext('2d');
+        //             ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //             ctx.drawImage(screenshot, 0, 0, canvas.width, canvas.height);
+        //             markupCore.renderToCanvas(ctx);
+        //             // hide the markups
+        //             markupCore.hide();
+        //         });
+        //     };
+        //     // Get the full image
+            
+        // })
+        
+        // const screenshotTarget = document.querySelector("#forgeViewer");
+
+        // document.querySelector(".button").addEventListener("click",()=>{
+
+        //     var node = document.getElementById('forgeViewer');
+
+
+
+// domtoimage.toPng(node).then(function (pngDataUrl) {
+//     var img = new Image();
+//     img.onload = function () {
+//         var context = canvas.getContext('2d');
+
+//         context.translate(canvas.width, 0);
+//         context.scale(-1, 1);
+//         context.drawImage(img, 0, 0);
+
+//         parent.removeChild(node);
+//         parent.appendChild(canvas);
+//     };
+
+//     img.src = pngDataUrl;
+// });
+
+
+        //     html2canvas(screenshotTarget).then((canvas) => {
+        //         const base64image = canvas.toDataURL("image/png");
+        //         // console.log("SCREENSHOT ACTION FIRST !")
+        //         // console.log(canvas)
+        //         // window.location.href = base64image;
+        //         // console.log(base64image)
+        //         // window.top.postMessage({values:"TEST MESSAGE FROM INSIDE!!!!!!!!*******"}, '*');
+        //         window.parent.postMessage({values:base64image}, "*");
+        // })
+// });
       </script>
       <script src="js/AdnElementLocatorExtension.js"></script>
       <script src="js/index.js"></script>
       <script src="js/lockCameraExtension.js"></script>
       <script src="js/html2canvas.js"></script>
+      <script src="js/ss.js"></script>
   </body>
   </html>
