@@ -200,11 +200,12 @@
 
         const iframeWind = viewerIframe.contentWindow;
         window.onmessage = function (e) {
-          console.log(e)
+       
           // console.log("Message received from parent: ", e.data.values);
           // console.log("Message received*****: ", e.data.values);
           // console.log("ON MESSAGE",e.data.values)
-        
+
+          
 
           if (e.data.values == "reset-viewer") {
             iframeWind.NOP_VIEWER.fireEvent({
@@ -226,7 +227,12 @@
                 .OUTLINE_ON_EVENT,
             });
           }
-      
+          else if (e.data.values == "public-page") {
+            console.log(e.data.values)
+            iframeWind.postMessage({ values: "public-page" }, "*")
+            
+          }
+
           else if (e.data.values == "off-outline") {
             iframeWind.NOP_VIEWER.fireEvent({
               type: iframeWind.Autodesk.ADN.ElementLocator.Event

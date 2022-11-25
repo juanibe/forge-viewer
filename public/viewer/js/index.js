@@ -131,7 +131,7 @@ document.addEventListener(
 
 
             document.querySelector(".button").addEventListener("click",()=>{
-                console.log("CLICK AT INDEXJS")
+                // console.log("CLICK AT INDEXJS")
                     var screenshot = new Image();
                     screenshot.onload = function () {
                         
@@ -139,7 +139,7 @@ document.addEventListener(
                         const newCanvas = document.querySelector("#snapshot")
                         console.log(newCanvas)
                         const dataURL = newCanvas.toDataURL();
-                        console.log(dataURL)
+                        // console.log(dataURL)
                         window.parent.postMessage({values:dataURL}, "*");
                         });    
                        
