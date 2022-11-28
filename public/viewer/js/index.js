@@ -118,7 +118,11 @@ document.addEventListener(
                     var ctx = canvas.getContext('2d');
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     ctx.drawImage(screenshot, 0, 0, canvas.width, canvas.height);
-                    markupCore.renderToCanvas(ctx);
+                    try{
+                        markupCore.renderToCanvas(ctx);
+                    }catch(error){
+                            //)
+                    }
                     
                     // hide the markups
                     // markupCore.hide();
